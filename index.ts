@@ -1,46 +1,25 @@
-// const express= require('express')
 require("dotenv").config()
 import express from 'express'
 const app= express()
 const port =process.env.PORT||3000;
 import db from './models'
-//import {users} from './seeders/users';
-const { sequelize,User,Project }= require('./models')
-
 
 app.use(express.json())
 
-//post or create
-app.post('/user',async(req,res)=>{
-    const {name,email,password}= req.body
-    try{
-        const user =await db.User.create({name,email,password})
-        return res.json(user)
-    }
-    catch(err){
-            console.log(err)
-            return res.status(500).json(err)
-    }
-})
-
-
+app.use(express.urlencoded({extended: false}))
 //read
-app.get('/user', async (req, res) => {
-    try {
-      const users = await db.User.findAll();
-      return res.json(users);
-    } catch (err) {
-      console.log(err);
-      return res.status(500).json({ error: 'Something went wrong!' });
-    }
-  });
+app.use('/user',require('./routes/getUser'))
 
-// const createUsers=()=>{
-//     users.map(user =>{
-//         db.User.create(user)
-//     })
-// }
-// createUsers()
+//read made in route and controller
+// app.get('/user', async (req, res) => {
+//     try {
+//       const users = await db.User.findAll();
+//       return res.json(users);
+//     } catch (err) {
+//       console.log(err);
+//       return res.status(500).json({ error: 'Something went wrong!' });
+//     }
+//   });
 
 
 db.sequelize.sync().then(()=>{
