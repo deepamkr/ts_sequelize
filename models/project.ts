@@ -7,9 +7,9 @@ interface ProjectAttributes {
   id: number;
   title: string;
   status: string;
- 
 }
 
+//console log error *****
 module.exports = (sequelize:any, DataTypes:any) => {
   class Project extends Model <ProjectAttributes>
   implements ProjectAttributes{
