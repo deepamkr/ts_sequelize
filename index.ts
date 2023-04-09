@@ -9,7 +9,7 @@ app.use(express.json())
 app.use(express.urlencoded({extended: false}))
 //read
 app.use('/user',require('./routes/getUser'))
-
+app.use('/post',require('./routes/postUser'))
 //read made in route and controller
 // app.get('/user', async (req, res) => {
 //     try {
